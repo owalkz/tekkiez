@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-xxl">
+            <a href="#intro" class="navbar-brand">
+                <span class="fw-bold text-success">
+                    <i class="bi bi-houses-fill"></i>
+                    Tekkiez
+                </span>
+            </a>
+            <!-- Toggle button for mobile screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/ctdashboard" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ctprofile" class="nav-link">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ctapplication" class="nav-link active">Apply for Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ctapplicationsmade" class="nav-link">View Applications</a>
+                    </li>
+                    <li class="nav-item ms-2 d-none d-md-inline">
+                        <a href="/logout" class="btn btn-outline-danger">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="property-management-page">
+        {% if eligibility[0]["profile_visibility"] == 1 %}
+            <div class="container-lg">
+                <table class="table mt-3">
+                    <thead>
+                    <tr>
+                        <th style="width:2%" scope="col">#</th>
+                        <th style="width:20%" scope="col"></th>
+                        <th style="width:10%" scope="col">Name</th>
+                        <th style="width:10%" scope="col">Date Posted</th>
+                        <th style="width:30%" scope="col">Description</th>
+                        <th style="width:13%" scope="col">Location</th>
+                        <th style="width:15%" scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for property in properties %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>
+                            <div style="height:200px; width: 200px">
+                                <img class="img-fluid" src="/static/property_images/{{ property['img_1'] }}" alt="Apartment">
+                            </div>
+                        </td>
+                        <td>{{ property["p_name"] }}</td>
+                        <td>{{ property["date_posted"] }}</td>
+                        <td>{{ property["p_description"] }}</td>
+                        <td>{{ property["p_location"] }}</td>
+                        <td>
+                            <form action="/ctapplication" method="post">
+                                <input hidden type="number" name="property_id" id="property_id" value="{{ property['p_id'] }}">
+                                <div class="mb-1 text-start">
+                                    <button type="submit" class="btn btn-outline-success">Apply</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% elif eligibility[0]["profile_visibility"] == 0 %}
+            <p class="lead text-center text-danger">Kindly complete your profile before applying for jobs</p>
+        {% endif %}
+    </section>
+
+{% endblock %}

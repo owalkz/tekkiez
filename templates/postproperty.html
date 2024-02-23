@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-xxl">
+            <a href="#intro" class="navbar-brand">
+                <span class="fw-bold text-success">
+                    <i class="bi bi-houses-fill"></i>
+                    Tekkiez
+                </span>
+            </a>
+            <!-- Toggle button for mobile screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/hdashboard" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/postproperty" class="nav-link active">Post a Property</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/hpropertymanagement" class="nav-link">Property Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Applications Management</a>
+                    </li>
+                    <li class="nav-item ms-2 d-none d-md-inline">
+                        <a href="/logout" class="btn btn-outline-danger">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="property-details-entry-form">
+        <form action="/postproperty" enctype="multipart/form-data" method="post">
+            <div class="container-lg mt-1 pt-5">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-5 text-start">
+                        <p class="lead text-center">Property Details</p>
+                        <label class="form-label" for="property_name">Property Name:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-house"></i>
+                                </span>
+                            <input autofocus class="form-control" type="text" name="property_name" id="property_name" placeholder="Enter your property's name" required>
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="What's your property's name?">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="property_description">Property Description:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-card-text"></i>
+                            </span>
+                            <input class="form-control" type="text" name="property_description" id="property_description" placeholder="e.g Apartments/Bungalow/etc." autocomplete="off" required>
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="This is the type of property. For example, it could be a 5-storey apartment with bedsitters and 1-bedroomed houses. Or a family home with a 0.5 acre farm. Be as specific as possible.">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="property_location">Location:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                </span>
+                            <input class="form-control" type="text" name="property_location" id="property_location" placeholder="Enter your property's address" required>
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Where is the property located?">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="form-floating mb-2 mt-5">
+                            <textarea name="job_description" class="form-control" id="description" style="height:140px" required></textarea>
+                            <label for="query">Describe the tasks you expect the caretaker to perform</label>
+                        </div>
+                    </div>
+                    <div class="col-md-5 text-start">
+                        <p class="lead text-center">Picture Uploads</p>
+                        <label class="form-label" for="pic_1">Picture 1:</label>
+                        <div class="input-group mb-1">
+                            <input class="form-control" type="file" name="pic_1" id="pic_1" required>
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Kindly upload a .jpg file only. This is the only image required but feel free to upload upto four more.">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="pic_2">Picture 2:</label>
+                        <div class="input-group mb-1">
+                            <input class="form-control" type="file" name="pic_2" id="pic_2">
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Kindly upload a .jpg file only.">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="pic_3">Picture 3:</label>
+                        <div class="input-group mb-1">
+                            <input class="form-control" type="file" name="pic_3" id="pic_3">
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Kindly upload a .jpg file only.">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="pic_4">Picture 4:</label>
+                        <div class="input-group mb-1">
+                            <input class="form-control" type="file" name="pic_4" id="pic_4">
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Kindly upload a .jpg file only.">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="pic_5">Picture 5:</label>
+                        <div class="input-group mb-5">
+                            <input class="form-control" type="file" name="pic_5" id="pic_5">
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Kindly upload a .jpg file only.">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-1 text-center">
+                        <button type="submit" class="btn btn-outline-primary">Post Property</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+{% endblock %}

@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-xxl">
+            <a href="#intro" class="navbar-brand">
+                <span class="fw-bold text-success">
+                    <i class="bi bi-houses-fill"></i>
+                    Tekkiez
+                </span>
+            </a>
+            <!-- Toggle button for mobile screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/ctdashboard" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ctprofile" class="nav-link active">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ctapplication" class="nav-link">Apply for Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ctapplicationsmade" class="nav-link">View Applications</a>
+                    </li>
+                    <li class="nav-item ms-2 d-none d-md-inline">
+                        <a href="/logout" class="btn btn-outline-danger">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="profile">
+        <div class="container-lg">
+            {% if ct_details[0]["profile_photo"] == None %}
+                <div class="text-center mt-4">
+                    <p class="lead text-danger">
+                        Your profile is not visible to potential employers and you cannot apply for jobs. Kindly update your profile by adding your profile photo, id scanned copy, and profile description.
+                    </p>
+                </div>
+            {% endif %}
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-4">
+                    <p class="text-start lead">Profile Picture</p>
+                    {% if ct_details[0]["profile_photo"] == None %}
+                        <img src="/static/profile_placeholder.png" alt="A person's face" class="img-responsive">
+                    {% else %}
+                        <div style="height: 400px; width: 400px">
+                            <img src="/static/profile_pictures/{{ ct_details[0]["profile_photo"] }}" alt="Your Profile Picture" class="img-fluid" style="height: 100%; max-width: 100%; margin: auto">
+                        </div>
+                        {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <p class="lead text-center">Permanent Details</p>
+                    <label class="form-label" for="name">Full Name:</label>
+                    <div class="input-group mb-1">
+                        <input class="form-control" disabled type="text" name="name" id="name" value="{{ ct_details[0]["ct_name"] }}">
+                    </div>
+                    <label class="form-label" for="email">Email address:</label>
+                    <div class="input-group mb-1">
+                        <input class="form-control" type="email" name="email" id="email" value="{{ ct_details[0]["email_address"] }}" disabled>
+                    </div>
+                    <label class="form-label" for="account-type">Account Type:</label>
+                    <div class="input-group mb-1">
+                        <input class="form-control" type="text" name="account-type" id="account-type" value="Caretaker" disabled>
+                    </div>
+                    <label class="form-label" for="id-number">ID Number:</label>
+                    <div class="input-group mb-1">
+                        <input class="form-control" disabled type="number" name="id-number" id="id-number" value="{{ ct_details[0]["id_number"] }}">
+                    </div>
+                    <label class="form-label" for="dob">Date of Birth:</label>
+                    <div class="input-group mb-1">
+                        <input class="form-control" disabled type="date" name="dob" id="dob" value="{{ ct_details[0]["date_of_birth"] }}">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p class="lead text-center">Editable Details</p>
+                    <form action="/ctprofile" enctype="multipart/form-data" method="post">
+                        <label class="form-label" for="address">Address:</label>
+                        <div class="input-group mb-1">
+                            <input class="form-control" type="text" name="address" id="address" placeholder="{{ ct_details[0]["address"] }}">
+                        </div>
+                        {% if ct_details[0]["profile_description"] == None %}
+                            <div class="form-floating mb-4 mt-5">
+                                <textarea name="description" class="form-control" id="description" style="height:140px" required></textarea>
+                                <label for="query">Describe yourself in less than 100 words</label>
+                            </div>
+                        {% else %}
+                            <div class="input-group mb-1">
+                                <textarea name="description" class="form-control" id="description" style="height:140px" placeholder="{{ ct_details[0]["profile_description"] }}"></textarea>
+                            </div>
+                        {% endif %}
+                        {% if ct_details[0]["profile_photo"] == None %}
+                            <label class="form-label" for="profile">Upload Profile Picture:</label>
+                            <div class="input-group mb-1">
+                                <input class="form-control" type="file" name="profile" id="profile" required>
+                                <span class="input-group-text">
+                                    <span data-bs-toggle="tooltip" data-bs-title="Kindly upload a .jpg file only.">
+                                        <i class="bi bi-question-diamond-fill text-muted"></i>
+                                    </span>
+                                </span>
+                            </div>
+                            <label class="form-label" for="id-scan">Upload ID Scan:</label>
+                            <div class="input-group mb-1">
+                                <input class="form-control" type="file" name="id_scan" id="id_scan" required>
+                                <span class="input-group-text">
+                                    <span data-bs-toggle="tooltip" data-bs-title="Kindly upload a .pdf file only.">
+                                        <i class="bi bi-question-diamond-fill text-muted"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        {% else %}
+                            <label class="form-label" for="profile">Change Profile Picture:</label>
+                            <div class="input-group mb-1">
+                                <input class="form-control" type="file" name="profile" id="profile">
+                                <span class="input-group-text">
+                                    <span data-bs-toggle="tooltip" data-bs-title="Kindly upload a .jpg file only.">
+                                        <i class="bi bi-question-diamond-fill text-muted"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        {% endif %}
+                        <div class="mb-3 mt-3 text-center">
+                            <button type="submit" class="btn btn-outline-primary">Update Details</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

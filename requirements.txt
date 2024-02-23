@@ -1,0 +1,6 @@
+cs50
+flask
+flask_session
+functools
+werkzeug.security
+werkzeug.utils

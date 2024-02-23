@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block main %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-xxl">
+            <a href="#intro" class="navbar-brand">
+                <span class="fw-bold text-success">
+                    <i class="bi bi-houses-fill"></i>
+                    Tekkiez
+                </span>
+            </a>
+            <!-- Toggle button for mobile screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/hdashboard" class="nav-link active">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/postproperty" class="nav-link">Post a Property</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/hpropertymanagement" class="nav-link">Property Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/happlicationmanagement" class="nav-link">Applications Management</a>
+                    </li>
+                    <li class="nav-item ms-2 d-none d-md-inline">
+                        <a href="/logout" class="btn btn-outline-danger">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="dashboard-content">
+        <div class="container-lg mt-5 pt-5">
+            <div class="row justify-content-center align-items-center ms-5">
+                <div class="col-4">
+                    <div class="card border-0">
+                        <h4 class="card-title">Properties Owned</h4>
+                        <p class="lead card-subtitle">Since Joining</p>
+                        <p class="display-5 my-4 text-success fw-bold">{{ property_count }}</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card border-0">
+                        <h4 class="card-title">Pending Applications</h4>
+                        <p class="lead card-subtitle">Since Joining</p>
+                        <p class="display-5 my-4 text-success fw-bold">{{ pending_applications }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

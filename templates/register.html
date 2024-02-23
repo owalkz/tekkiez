@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.png">
+    <title>Register</title>
+</head>
+<body>
+    <section id="login-form">
+        <div class="container-lg">
+            <div class="text-center mt-4">
+                <h2>Register</h2>
+                <p class="lead">Fill in your details below or <a href="/login">login</a> if you already have an account.</p>
+            </div>
+
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-7 text-center d-none d-md-block">
+                    <img src="/static/heroimage.jpg" alt="A house held in someone's hands." class="img-fluid">
+                </div>
+                <div class="col-md-5 text-start">
+                    <form action="/register" method="post">
+                        <label class="form-label" for="name">Full Name:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill"></i>
+                              </span>
+                            <input autofocus class="form-control" type="text" name="name" id="name" placeholder="Enter your name" required>
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="What's your name?">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="email">Email address:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-envelope-at-fill"></i>
+                            </span>
+                            <input class="form-control" type="email" name="email" id="email" placeholder="e.g johndoe@example.com" autocomplete="off" required>
+                        </div>
+                        <label class="form-label" for="account-type">Account Type:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-people-fill"></i>
+                            </span>
+                            <select name="account-type" id="account-type" class="form-select" required>
+                                <option value="" selected disabled>Select Account Type</option>
+                                <option value="caretaker">Caretaker</option>
+                                <option value="home-owner">Home Owner</option>
+                            </select>
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Select Home Owner if you're looking to hire caretakers. Select Caretaker if you're seeking employment as a caretaker.">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="address">Address:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-house-door-fill"></i>
+                              </span>
+                            <input class="form-control" type="text" name="address" id="address" placeholder="Enter your address" required>
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Where do you live?">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <label class="form-label" for="id-number">ID Number:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-house-door-fill"></i>
+                              </span>
+                            <input class="form-control" type="number" name="id-number" id="id-number" minlength="7" placeholder="Enter your National Identification Number" required>
+                        </div>
+                        <label class="form-label" for="dob">Date of Birth:</label>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text">
+                                <i class="bi bi-calendar-week"></i>
+                            </span>
+                            <input class="form-control" type="date" name="dob" id="dob" required>
+                        </div>
+                        <label class="form-label" for="password">Password:</label>
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">
+                                <i class="bi bi-key-fill"></i>
+                              </span>
+                            <input class="form-control" type="password" name="password" minlength="8" id="password" placeholder="Choose a strong password" required>
+                            <span class="input-group-text">
+                                <span data-bs-toggle="tooltip" data-bs-title="Password must be 8 characters or more.">
+                                    <i class="bi bi-question-diamond-fill text-muted"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="mb-1 text-center">
+                            <button type="submit" class="btn btn-outline-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS Script-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+</body>
+</html>
